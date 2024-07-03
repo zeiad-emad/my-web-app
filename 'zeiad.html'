@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Password App</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="login" style="text-align: center;">
+        <label for="name" style="font-size: 32px;">ادخل اسمك:</label><br>
+        <input type="text" id="nameInput" placeholder="اسم المستخدم" style="font-size: 32px;"><br><br>
+        <label for="password" style="font-size: 32px;">ادخل الباسورد:</label><br>
+        <input type="password" id="passwordInput" placeholder="الباسورد" style="font-size: 32px;"><br><br>
+        <button onclick="tempLogin()" style="font-size: 32px;">تسجيل الدخول</button>
+    </div>
+    
+    <div id="app" style="display: none; text-align: center;">
+        <h1 style="font-size: 36px;">مرحباً <span id="usernameDisplay"></span>!</h1>
+        <br>
+        <button onclick="showMessage()" style="font-size: 32px;">اضغط هنا لرؤية الرسالة</button>
+        <p id="message" style="font-size: 32px; margin-top: 20px;"></p>
+        <p id="poem" style="font-size: 24px; margin-top: 20px; white-space: pre-wrap;"></p>
+    </div>
+
+    <script>
+        var allowedUsernames = ["Shaima"];
+        var correctPassword = "26-11-2023";
+
+        // متغيرات مؤقتة للحفاظ على اسم المستخدم وكلمة المرور
+        var tempUsername = "";
+        var tempPassword = "";
+
+        function tempLogin() {
+            tempUsername = document.getElementById("nameInput").value.trim();
+            tempPassword = document.getElementById("passwordInput").value.trim();
+
+            // إذا كان اسم المستخدم مسموحًا والباسورد صحيحًا، قم بعرض التطبيق الحقيقي
+            if (allowedUsernames.includes(tempUsername) && tempPassword === correctPassword) {
+                document.getElementById("login").classList.add("hidden"); // إخفاء نموذج تسجيل الدخول
+                document.getElementById("app").style.display = "block"; // عرض التطبيق الرئيسي
+                document.getElementById("usernameDisplay").innerText = tempUsername; // عرض اسم المستخدم
+            } else {
+                alert("اسم المستخدم أو كلمة المرور غير صحيحة. حاول مرة أخرى.");
+            }
+        }
+
+        function showMessage() {
+            var message = "أنا آسف، " + document.getElementById("usernameDisplay").innerText + ".";
+            document.getElementById("message").innerText = message;
+
+            var poem = `
+            انتي حلوه ... حلوه كأنك نازلة من الجنة ...
+            جميلة جمال أي شخص يتمني يكون زيك ...
+            ومين زيك ... ومين زيك يا حلوه ...
+            تملي كلامك كما الغنوة قادرة تنسي الناس احزانهم ...
+            ودايما حاطة مكانك في مكانهم ...
+            شاطرة في كل حياتك ...
+            شاطرة في كل حياتك ...
+            ودايما بتعيدي حساباتك ...
+            مفيش منك ولا زيك ولو جابو بنات العالم قدامك
+            ولو كنتي معاهم في مقارنة ...
+            هتكون كمان نور مع الضلمة ...
+            كل اللي شافوكي حبوكي ...
+            كل اللي شافوكي حبوكي ...
+            وكل اللي سابوكي ما يستاهلوش ...
+            ما يستاهلوش ...
+            عمرك شوفتي وردة في بيت كله وحوش ...
+            عمرك شوفتي وردة في بيت كله وحوش
+            `;
+            document.getElementById("poem").innerText = poem;
+        }
+    </script>
+</body>
+</html>
